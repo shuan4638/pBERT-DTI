@@ -25,7 +25,7 @@ class DTIDataset(object):
         df = pd.read_csv('data/%s_data.csv' % dataset_name)
         self.drugs = df['Drug'].values
         self.targets = df['Target'].values
-        self.labels = df['Y']
+        self.labels = df['Y_binarized']
         self.train_ids = df.index[df['Split'] == 'train'].values
         self.val_ids = df.index[df['Split'] == 'valid'].values
         self.test_ids = df.index[df['Split'] == 'test'].values

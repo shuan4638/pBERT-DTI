@@ -31,7 +31,8 @@ def run_a_train_epoch(args, epoch, model, data_loader, loss_criterion, optimizer
 
         if batch_id % args['print_every'] == 0:
             print('\repoch %d/%d, batch %d/%d, loss %.4f' % (epoch + 1, args['num_epochs'], batch_id + 1, len(data_loader), loss), end='', flush=True)
-    precision, recall, thresholds = metrics.precision_recall_curve(true_ys, pred_ys)
+    true_ys, pred_ys = np.concatenate(true_ys), np.concatenate(pred_ys)
+	precision, recall, thresholds = metrics.precision_recall_curve(true_ys, pred_ys)
     auc = metrics.auc(recall, precision)
 
     print('\nepoch %d/%d, training loss: %.4f, prauc: %.4f' % (epoch + 1, args['num_epochs'], train_loss/batch_id, auc))
@@ -58,14 +59,9 @@ def run_an_eval_epoch(args, model, data_loader, loss_criterion):
             pred_ys.append(F.sigmoid(predictions).cpu().detach().numpy())
             true_ys.append(labels.cpu().detach().numpy())
 		
-    # print ('validation loss: %.4f' % (val_loss/batch_id))
-    # print (true_ys)
-    # print (pred_ys)
     true_ys, pred_ys = np.concatenate(true_ys), np.concatenate(pred_ys)
     precision, recall, thresholds = metrics.precision_recall_curve(true_ys, pred_ys)
     auc = metrics.auc(recall, precision)
-    # print ('AUC:', auc)
-    # prauc = metrics.average_precision_score(true_ys, pred_ys)
     return auc
 
 
