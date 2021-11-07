@@ -1,9 +1,5 @@
-# DTIBERT
-Predicting Drug-Target Interaction by DRI-BERT with pretrained BERT model [ChemBERT](https://www.nature.com/articles/s41598-021-90259-7) and [ProtBERT](https://www.computer.org/csdl/journal/tp/5555/01/09477085/1v2M3TwoN4A) <br>
-
-
-[JACS Au 2021](https://pubs.acs.org/doi/10.1021/jacsau.1c00246).
-
+# DTI-BERT
+Predicting Drug-Target Interaction by DTI-BERT with pretrained BERT model [ChemBERT](https://www.nature.com/articles/s41598-021-90259-7) and [ProtBERT](https://www.computer.org/csdl/journal/tp/5555/01/09477085/1v2M3TwoN4A) and Paiwise Attention Layers (PALs) <br>
 ## Developer
 Shuan Chen<br>
 
@@ -23,7 +19,7 @@ Use `-d` to change the datasset like
 ```
 !python main.py -d KIBA_DAVIS
 ```
-Use `-l` to test the effect of different Paiwise Attention Layers(PALs).
+Use `-l` to test the effect of different layers of PALs.
 ```
 !python main.py -d KIBA_DAVIS -l 5
 ```
