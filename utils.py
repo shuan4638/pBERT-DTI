@@ -25,7 +25,7 @@ class DTIDataset(object):
         df = pd.read_csv('data/%s_data.csv' % dataset_name)
         self.drugs = df['Drug'].values
         self.targets = df['Target'].values
-        self.labels = df['Y_binarized']
+        self.labels = df['Y_binarized'].values
         self.train_ids = df.index[df['Split'] == 'train'].values
         self.val_ids = df.index[df['Split'] == 'valid'].values
         self.test_ids = df.index[df['Split'] == 'test'].values
@@ -40,7 +40,7 @@ class DTIDataset(object):
         return len(self.drugs)
 			
 class EarlyStopping(object):
-    def __init__(self, mode='higher', patience=10, filename=None, metric='pr_auc_score'):
+    def __init__(self, mode='higher', patience=10, filename=None):
         self.mode = mode
         self._check = self._check_higher
         self.patience = patience
@@ -94,12 +94,19 @@ def mkdir_p(path):
             raise
 
 def load_dataloader(args):
-	dataset = DTIDataset(args['dataset'])
-	train_set, val_set, test_set = Subset(dataset, dataset.train_ids), Subset(dataset, dataset.val_ids), Subset(dataset, dataset.test_ids)
-	train_loader = DataLoader(dataset=train_set, batch_size=args['batch_size'], shuffle=True)
-	val_loader = DataLoader(dataset=val_set, batch_size=args['batch_size'])
-	test_loader = DataLoader(dataset=test_set, batch_size=args['batch_size'])
-	return train_loader, val_loader, test_loader
+    dataset = DTIDataset(args['dataset'])
+    print ('Size of train data:', len(dataset.train_ids))
+    print ('Size of validation data:', len(dataset.val_ids))
+    print ('Size of test data:', len(dataset.test_ids))
+    if len(args['dataset'].split('_')) == 2:
+        train_set, val_set, test_set = Subset(dataset, dataset.train_ids), Subset(dataset, dataset.test_ids), Subset(dataset, dataset.test_ids)
+    else:
+        train_set, val_set, test_set = Subset(dataset, dataset.train_ids), Subset(dataset, dataset.val_ids), Subset(dataset, dataset.test_ids)
+    train_loader = DataLoader(dataset=train_set, batch_size=args['batch_size'], shuffle=True)
+    val_loader = DataLoader(dataset=val_set, batch_size=args['batch_size'])
+    test_loader = DataLoader(dataset=test_set, batch_size=args['batch_size'])
+    
+    return train_loader, val_loader, test_loader
 
 def load_model(args):
     model = PairwiseAttentionLinear(n_layers = args['n_layers'])
