@@ -1,4 +1,4 @@
-# pBERT-DTI
+# pBERT-DTI: Deep learning model to predict drug-target interaction based on pre-trained BERT
 ### The winner project of 2021 Daewoong Foundation AI Big Data Hackathon
 Predicting Drug-Target Interaction by DTI-BERT with pre-trained [ProtBERT](https://www.computer.org/csdl/journal/tp/5555/01/09477085/1v2M3TwoN4A) and Pairwise Attention Layers (PALs) <br>
 
@@ -11,7 +11,7 @@ Shuan Chen, Ramil Babazade<br>
 Download the dataset first at [dropbox](https://www.dropbox.com/sh/552lndmllnxex4m/AAC3jUQIDRVIiiHaLlaisHTRa?dl=0) and put them in ./data directory <br>
 DAVIS dataset includes 25,772 DTI pairs <br>
 KIBA dataset includes 117,657D TI pairs <br>
-DAVIS_KIBA_data.csv dataset means the model will be trained by all DAVIS data and tested on KIBA dataset <br>
+The data is splited by [TDC](https://tdcommons.ai/multi_pred_tasks/dti/) and binarized according to the description in [Sci. Rep., 2021](https://www.nature.com/articles/s41598-021-83679-y)<br>
 
 ## Quick start
 Quick start by running
