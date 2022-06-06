@@ -1,4 +1,6 @@
 # pBERT-DTI: Deep learning model to predict drug-target interaction based on pre-trained BERT
+[![DOI](https://zenodo.org/badge/425242089.svg)](https://zenodo.org/badge/latestdoi/425242089)
+
 ### The winner project of 2021 Daewoong Foundation AI Big Data Hackathon
 Predicting Drug-Target Interaction by DTI-BERT with pre-trained [ProtBERT](https://www.computer.org/csdl/journal/tp/5555/01/09477085/1v2M3TwoN4A) and Pairwise Attention Layers (PALs) <br>
 
